@@ -3,6 +3,7 @@ import { Header } from '../components/Header';
 import { CharacterDrawer } from '../components/CharacterDrawer';
 import { VitalsPanel } from '../components/VitalsPanel';
 import { CharacteristicsGrid } from '../components/CharacteristicsGrid';
+import { WeaponsPanel } from '../components/WeaponsPanel';
 import { SkillsTab } from '../components/SkillsTab';
 import { GrimoireTab } from '../components/GrimoireTab';
 import { MythosCodexTab } from '../components/MythosCodexTab';
@@ -31,6 +32,7 @@ export default function Home() {
               <div class="space-y-6">
                 <VitalsPanel />
                 <CharacteristicsGrid />
+                <WeaponsPanel />
               </div>
             </Match>
             <Match when={activeTab() === 'skills'}>

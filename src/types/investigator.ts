@@ -90,6 +90,19 @@ export interface SkillItem {
   checked: boolean;
 }
 
+export interface WeaponItem {
+  id: string;
+  name: string;
+  skillName: string;
+  damage: string;
+  range: string;
+  attacksPerRound: string;
+  currentAmmo: number;
+  maxAmmo: number;
+  malfunction: number;
+  notes: string;
+}
+
 export interface TomeItem {
   id: string;
   name: string;
@@ -155,6 +168,7 @@ export interface InvestigatorData {
   characteristics: Characteristics;
   ageModifiers?: CharacteristicModifiers;
   skills: SkillItem[];
+  weapons: WeaponItem[];
   tomes: TomeItem[];
   spells: SpellItem[];
   entities: EntityItem[];

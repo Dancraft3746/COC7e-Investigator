@@ -67,6 +67,44 @@ export const defaultEdwardPierce: InvestigatorData = {
     LUCK: 55
   },
   skills: defaultSkillsList,
+  weapons: [
+    {
+      id: 'wp_brawl',
+      name: '徒手格鬥 / 拳打腳踢',
+      skillName: '格鬥（鬥毆 Brawl）',
+      damage: '1D3+DB',
+      range: '觸碰 (Touch)',
+      attacksPerRound: '1',
+      currentAmmo: 0,
+      maxAmmo: 0,
+      malfunction: 100,
+      notes: '可實施戰技：繳械、摔絆、搶抱'
+    },
+    {
+      id: 'wp_revolver',
+      name: '.38 口徑左輪手槍',
+      skillName: '射擊（手槍 Handgun）',
+      damage: '1D10',
+      range: '15 米',
+      attacksPerRound: '1(3)',
+      currentAmmo: 6,
+      maxAmmo: 6,
+      malfunction: 100,
+      notes: '可靠便攜，極限成功造成穿刺傷害 (10+1D10)'
+    },
+    {
+      id: 'wp_knife',
+      name: '小型折疊匕首',
+      skillName: '格鬥（鬥毆 Brawl）',
+      damage: '1D4+DB',
+      range: '觸碰 (Touch)',
+      attacksPerRound: '1',
+      currentAmmo: 0,
+      maxAmmo: 0,
+      malfunction: 100,
+      notes: '隱蔽防身，穿刺武器'
+    }
+  ],
   tomes: [
     { id: 'tm_1', name: '《玄君七章秘經》殘篇手抄', language: '漢語/古文', status: '略讀完成', sanLoss: '1D4', mythosGain: 3, studyTime: '8 週', spells: '召引地底之影' }
   ],
@@ -1556,6 +1594,44 @@ export const defaultNormanNobody: InvestigatorData = {
     EDU: normanRaw.characteristics.EDU,
     LUCK: normanRaw.investigator.luck
   },
+  weapons: [
+    {
+      id: 'wp_norman_brawl',
+      name: '戰地徒手格鬥',
+      skillName: '格鬥（鬥毆 Brawl）',
+      damage: '1D3+DB',
+      range: '觸碰 (Touch)',
+      attacksPerRound: '1',
+      currentAmmo: 0,
+      maxAmmo: 0,
+      malfunction: 100,
+      notes: '可實施進階戰技'
+    },
+    {
+      id: 'wp_norman_revolver',
+      name: '.38 特種警用左輪手槍',
+      skillName: '射擊（手槍 Handgun）',
+      damage: '1D10',
+      range: '15 米',
+      attacksPerRound: '1(3)',
+      currentAmmo: 6,
+      maxAmmo: 6,
+      malfunction: 100,
+      notes: '一戰退役配槍，極限穿刺'
+    },
+    {
+      id: 'wp_norman_shotgun',
+      name: '12號雙管霰彈槍',
+      skillName: '射擊（手槍 Handgun）',
+      damage: '4D6/2D6/1D6',
+      range: '10/20/50 米',
+      attacksPerRound: '1 或 2',
+      currentAmmo: 2,
+      maxAmmo: 2,
+      malfunction: 100,
+      notes: '大威力面殺傷，近距致命打擊'
+    }
+  ],
   skills: defaultSkillsList.map((s) => {
     if (s.name.includes('克蘇魯神話')) return { ...s, total: 35 };
     if (s.name.includes('心理學')) return { ...s, total: 80 };
