@@ -1,10 +1,12 @@
 import { Component, createSignal, For, Show } from 'solid-js';
 import { activeChar, setActiveChar } from '../stores/characterStore';
 import type { TomeItem, SpellItem } from '../types/investigator';
+import { SpellCastModal } from './SpellCastModal';
 
 export const GrimoireTab: Component = () => {
   const [showAddTome, setShowAddTome] = createSignal(false);
   const [showAddSpell, setShowAddSpell] = createSignal(false);
+  const [selectedSpellForCast, setSelectedSpellForCast] = createSignal<SpellItem | null>(null);
 
   // New Tome state
   const [tomeName, setTomeName] = createSignal('');
@@ -157,12 +159,20 @@ export const GrimoireTab: Component = () => {
                     {spell.desc}
                   </p>
                 </div>
-                <div class="mt-3 pt-2 border-t border-parchment-300 flex justify-end">
+                <div class="mt-3 pt-2 border-t border-parchment-300 flex justify-end gap-2">
                   <button
                     onClick={() => handleCopySpellCast(spell)}
-                    class="bg-eldritch-gold hover:bg-amber-600 text-stone-900 text-xs px-2.5 py-1 rounded font-bold cursor-pointer transition shadow-xs"
+                    class="bg-parchment-300 hover:bg-parchment-400 text-stone-800 text-xs px-2.5 py-1 rounded font-bold cursor-pointer transition shadow-xs"
+                    title="一鍵複製 Discord 施法宣告"
                   >
-                    🔮 宣告施法
+                    📋 複製宣告
+                  </button>
+                  <button
+                    onClick={() => setSelectedSpellForCast(spell)}
+                    class="bg-eldritch-purple hover:bg-purple-900 text-amber-100 text-xs px-2.5 py-1 rounded font-bold cursor-pointer transition shadow-xs flex items-center gap-1"
+                    title="進行法力消耗、鮮血魔法獻祭、理智損耗與意志檢定"
+                  >
+                    <span>🔮 詠唱施法 (Cast)</span>
                   </button>
                 </div>
               </div>
@@ -278,6 +288,13 @@ export const GrimoireTab: Component = () => {
           </div>
         </div>
       </Show>
+
+      {/* Interactive Spell Casting Engine Modal */}
+      <SpellCastModal
+        spell={selectedSpellForCast()}
+        isOpen={selectedSpellForCast() !== null}
+        onClose={() => setSelectedSpellForCast(null)}
+      />
     </div>
   );
 };

@@ -22,3 +22,9 @@ export const [activePanic, setActivePanic] = createStore<PanicState>({
   durationRounds: 0,
   phobiaMania: '',
 });
+
+export function triggerSanityCheck(loss: number) {
+  if (loss >= 5) {
+    setIsPanicModalOpen(true);
+  }
+}
