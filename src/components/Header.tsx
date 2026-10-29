@@ -14,6 +14,7 @@ import {
   loadNormanNobodyProfile,
   resetToDefaultPierce,
 } from '../stores/characterStore';
+import { setIsDevPhaseOpen } from './DevelopmentPhaseModal';
 
 export const Header: Component = () => {
   let fileInputRef: HTMLInputElement | undefined;
@@ -81,10 +82,18 @@ export const Header: Component = () => {
             📋 Discord 狀態卡
           </button>
           <button
-            onClick={handleCopyGrowth}
-            class="bg-eldritch-green hover:bg-opacity-90 text-amber-100 px-3 py-1.5 rounded text-xs font-bold tracking-wider shadow transition cursor-pointer"
+            onClick={() => setIsDevPhaseOpen(true)}
+            class="bg-eldritch-green hover:bg-opacity-90 text-amber-100 px-3 py-1.5 rounded text-xs font-bold tracking-wider shadow transition cursor-pointer flex items-center gap-1 font-title"
+            title="啟動團後全體技能成長輪盤、幸運恢復與 90% 大師里程碑結算"
           >
-            📈 成長檢定清單
+            <span>📈 團後成長結算</span>
+          </button>
+          <button
+            onClick={handleCopyGrowth}
+            class="border border-eldritch-green hover:bg-green-100 text-green-950 px-2.5 py-1.5 rounded text-xs font-bold shadow transition cursor-pointer"
+            title="複製已標記成長技能清單給 KP"
+          >
+            📋 成長清單
           </button>
           <button
             onClick={handleShare}

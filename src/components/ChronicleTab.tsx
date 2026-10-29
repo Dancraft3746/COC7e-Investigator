@@ -1,5 +1,6 @@
 import { Component, For } from 'solid-js';
 import { activeChar, generateGrowthChecklist } from '../stores/characterStore';
+import { setIsDevPhaseOpen } from './DevelopmentPhaseModal';
 
 export const ChronicleTab: Component = () => {
   const handleCopyGrowth = () => {
@@ -23,12 +24,20 @@ export const ChronicleTab: Component = () => {
             記錄每場模組通關時間、KP 名字、理智與幸運收支
           </p>
         </div>
-        <button
-          onClick={handleCopyGrowth}
-          class="bg-eldritch-green hover:bg-opacity-90 text-amber-100 px-3 py-1.5 rounded text-xs font-bold shadow cursor-pointer transition"
-        >
-          📋 一鍵複製團後成長檢定表
-        </button>
+        <div class="flex gap-2">
+          <button
+            onClick={() => setIsDevPhaseOpen(true)}
+            class="bg-eldritch-green hover:bg-opacity-90 text-amber-100 px-3 py-1.5 rounded text-xs font-bold shadow cursor-pointer transition flex items-center gap-1 font-title"
+          >
+            <span>🎲 進入團後成長結算輪盤</span>
+          </button>
+          <button
+            onClick={handleCopyGrowth}
+            class="bg-sepia-800 hover:bg-sepia-900 text-parchment-100 px-3 py-1.5 rounded text-xs font-bold shadow cursor-pointer transition"
+          >
+            📋 複製成長清單
+          </button>
+        </div>
       </div>
 
       <div class="space-y-3">

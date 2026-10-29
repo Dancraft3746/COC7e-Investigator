@@ -13,6 +13,7 @@ import { DiceModal } from '../components/DiceModal';
 import { PanicModal } from '../components/PanicModal';
 import { CreationWizardModal } from '../components/CreationWizardModal';
 import { AgeAdjustmentModal } from '../components/AgeAdjustmentModal';
+import { DevelopmentPhaseModal } from '../components/DevelopmentPhaseModal';
 import { activeTab, initApp } from '../stores/characterStore';
 
 export default function Home() {
@@ -40,6 +41,9 @@ export default function Home() {
 
         {/* Global Age Adjustment & EDU Improvement Modal */}
         <AgeAdjustmentModal />
+
+        {/* Global Development Phase Resolution Modal */}
+        <DevelopmentPhaseModal />
 
         {/* Main Content Sheet */}
         <main class="parchment-sheet p-4 sm:p-6 rounded-b-lg shadow-2xl border-t-0 min-h-[750px]">
