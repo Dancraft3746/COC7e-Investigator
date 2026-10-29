@@ -15,6 +15,7 @@ import { CreationWizardModal } from '../components/CreationWizardModal';
 import { AgeAdjustmentModal } from '../components/AgeAdjustmentModal';
 import { DevelopmentPhaseModal } from '../components/DevelopmentPhaseModal';
 import { FinanceModal } from '../components/FinanceModal';
+import { SanityRecoveryModal } from '../components/SanityRecoveryModal';
 import { activeTab, initApp } from '../stores/characterStore';
 
 export default function Home() {
@@ -48,6 +49,9 @@ export default function Home() {
 
         {/* Global Finance & Wallet Modal */}
         <FinanceModal />
+
+        {/* Global Sanity Therapy & Recovery Suite */}
+        <SanityRecoveryModal />
 
         {/* Main Content Sheet */}
         <main class="parchment-sheet p-4 sm:p-6 rounded-b-lg shadow-2xl border-t-0 min-h-[750px]">
