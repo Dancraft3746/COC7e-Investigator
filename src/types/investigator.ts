@@ -138,6 +138,9 @@ export interface EntityItem {
   category: '舊日支配者/外神' | '神話生物/眷族' | '邪教組織' | '神話造物與神器' | string;
   name: string;
   aliases?: string;
+  sanLossSuccess?: string;
+  sanLossFailure?: string;
+  hasEncountered?: boolean;
   notes: string;
 }
 

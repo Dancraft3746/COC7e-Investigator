@@ -112,7 +112,11 @@ export const defaultEdwardPierce: InvestigatorData = {
     { id: 'sp_1', name: '肉體防護術 (Flesh Ward)', cost: '可變 MP, 1D4 SAN', castTime: '5 輪', source: '《玄君七章秘經》殘篇', desc: '提供等同於投入 MP 點數之物理傷害抵消護盾。' }
   ],
   entities: [
-    { id: 'en_1', category: '神話生物/眷族', name: '食屍鬼 (Ghoul)', aliases: '墓穴啃噬者', notes: '阿卡姆公墓深處曾目擊過其佝僂的犬面輪廓。' }
+    { id: 'en_1', category: '神話生物/眷族', name: '食屍鬼 (Ghoul)', aliases: '墓穴啃噬者', sanLossSuccess: '0', sanLossFailure: '1D6', notes: '阿卡姆公墓深處曾目擊過其佝僂的犬面輪廓與橡膠質皮膚。' },
+    { id: 'en_2', category: '神話生物/眷族', name: '深潛者 (Deep One)', aliases: '印斯茅斯魚人', sanLossSuccess: '0', sanLossFailure: '1D6', notes: '兩棲人形海怪，眼瞼不閉，散發強烈魚腥味，信奉大袞與克蘇魯。' },
+    { id: 'en_3', category: '神話生物/眷族', name: '修格斯 (Shoggoth)', aliases: '原生質惡念', sanLossSuccess: '1D6', sanLossFailure: '1D20', notes: '流動著多隻眼睛的龐大惡臭肉塊，伴隨「泰克利-利！」尖嘯席捲一切。' },
+    { id: 'en_4', category: '神話生物/眷族', name: '廷達洛斯之獵犬 (Hound of Tindalos)', aliases: '銳角獵殺者', sanLossSuccess: '1D3', sanLossFailure: '1D20', notes: '棲於非歐幾里德角維度之捕食者，穿透小於120度的牆角獵殺時間旅人。' },
+    { id: 'en_5', category: '舊日支配者/外神', name: '偉大的克蘇魯 (Great Cthulhu)', aliases: '拉萊耶之主', sanLossSuccess: '1D10', sanLossFailure: '1D100', notes: '沉睡於南太平洋拉萊耶海底古城之舊日支配者，夢境干涉全人類心靈。' }
   ],
   contacts: [
     { id: 'ct_1', name: '亨利·阿米蒂奇博士', relation: '贊助者/導師', role: '密大圖書館長', notes: '提供特藏文獻調閱特權與學術諮詢。', isKeyConnection: true }
