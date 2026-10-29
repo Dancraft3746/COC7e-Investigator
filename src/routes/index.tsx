@@ -9,6 +9,7 @@ import { GrimoireTab } from '../components/GrimoireTab';
 import { MythosCodexTab } from '../components/MythosCodexTab';
 import { SocialWebTab } from '../components/SocialWebTab';
 import { ChronicleTab } from '../components/ChronicleTab';
+import { DiceModal } from '../components/DiceModal';
 import { activeTab, initApp } from '../stores/characterStore';
 
 export default function Home() {
@@ -24,6 +25,9 @@ export default function Home() {
 
         {/* Multi-Character Slide-over Drawer */}
         <CharacterDrawer />
+
+        {/* Global Interactive Dice Roller Modal */}
+        <DiceModal />
 
         {/* Main Content Sheet */}
         <main class="parchment-sheet p-4 sm:p-6 rounded-b-lg shadow-2xl border-t-0 min-h-[750px]">

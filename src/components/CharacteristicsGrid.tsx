@@ -3,6 +3,7 @@ import {
   activeChar,
   setActiveChar,
   charSum,
+  openDiceModal,
 } from '../stores/characterStore';
 import type { Characteristics } from '../types/investigator';
 
@@ -150,6 +151,16 @@ export const CharacteristicsGrid: Component = () => {
                   <div class="text-[11px] font-mono font-bold text-sepia-800 bg-parchment-200 py-0.5 rounded">
                     {key === 'LUCK' ? '幸運值' : `${half()} | ${fifth()}`}
                   </div>
+
+                  <button
+                    onClick={() =>
+                      openDiceModal(`${key} ${charLabels[key].zh} 屬性檢定`, val())
+                    }
+                    class="mt-1.5 w-full bg-eldritch-purple hover:bg-opacity-90 text-amber-100 py-0.5 rounded text-[10px] font-bold cursor-pointer transition shadow-xs flex items-center justify-center gap-1 hover:scale-105"
+                    title={`線上擲骰檢定 ${key} (${val()}%)`}
+                  >
+                    <span>🎲 檢定</span>
+                  </button>
                 </div>
               );
             }}

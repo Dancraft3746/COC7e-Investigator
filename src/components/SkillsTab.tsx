@@ -5,6 +5,7 @@ import {
   discordBotPrefix,
   setDiscordBotPrefix,
   formatDiceCommand,
+  openDiceModal,
 } from '../stores/characterStore';
 import type { SkillItem, DiceBotPrefix } from '../types/investigator';
 
@@ -168,13 +169,22 @@ export const SkillsTab: Component = () => {
                     </span>
                   </div>
 
-                  {/* 1-Click Discord Roll Button */}
+                  {/* Interactive Dice Roll Button */}
                   <button
-                    onClick={() => handleCopyRoll(skill)}
-                    class="bg-eldritch-purple hover:bg-opacity-90 text-amber-100 w-7 h-7 rounded flex items-center justify-center text-xs font-bold cursor-pointer transition shadow-xs"
-                    title={`複製 ${formatDiceCommand(skill.name, skill.total)}`}
+                    onClick={() => openDiceModal(skill.name, skill.total, skill.id)}
+                    class="bg-eldritch-purple hover:bg-opacity-90 text-amber-100 w-7 h-7 rounded flex items-center justify-center text-xs font-bold cursor-pointer transition shadow-xs hover:scale-110"
+                    title={`線上擲骰檢定 ${skill.name} (${skill.total}%)`}
                   >
                     🎲
+                  </button>
+
+                  {/* 1-Click Discord Roll Command Button */}
+                  <button
+                    onClick={() => handleCopyRoll(skill)}
+                    class="bg-sepia-800 hover:bg-sepia-900 text-parchment-100 w-7 h-7 rounded flex items-center justify-center text-[10px] font-bold cursor-pointer transition shadow-xs"
+                    title={`複製 Discord 擲骰指令: ${formatDiceCommand(skill.name, skill.total)}`}
+                  >
+                    📋
                   </button>
                 </div>
               </div>
