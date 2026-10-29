@@ -2,11 +2,13 @@ import { Component, createSignal, For, Show } from 'solid-js';
 import { activeChar, setActiveChar } from '../stores/characterStore';
 import type { TomeItem, SpellItem } from '../types/investigator';
 import { SpellCastModal } from './SpellCastModal';
+import { TomeStudyModal } from './TomeStudyModal';
 
 export const GrimoireTab: Component = () => {
   const [showAddTome, setShowAddTome] = createSignal(false);
   const [showAddSpell, setShowAddSpell] = createSignal(false);
   const [selectedSpellForCast, setSelectedSpellForCast] = createSignal<SpellItem | null>(null);
+  const [selectedTomeForStudy, setSelectedTomeForStudy] = createSignal<TomeItem | null>(null);
 
   // New Tome state
   const [tomeName, setTomeName] = createSignal('');
@@ -113,6 +115,14 @@ export const GrimoireTab: Component = () => {
                     📜 記載法術: {tome.spells}
                   </p>
                 </Show>
+                <div class="mt-2.5 pt-2 border-t border-parchment-300 flex justify-end">
+                  <button
+                    onClick={() => setSelectedTomeForStudy(tome)}
+                    class="bg-eldritch-green hover:bg-emerald-700 text-amber-100 text-[11px] px-2.5 py-1 rounded font-bold cursor-pointer transition shadow-xs flex items-center gap-1"
+                  >
+                    <span>📖 研讀典籍 (初讀/精讀)</span>
+                  </button>
+                </div>
               </div>
             )}
           </For>
@@ -294,6 +304,13 @@ export const GrimoireTab: Component = () => {
         spell={selectedSpellForCast()}
         isOpen={selectedSpellForCast() !== null}
         onClose={() => setSelectedSpellForCast(null)}
+      />
+
+      {/* Interactive Two-Stage Tome Study Modal */}
+      <TomeStudyModal
+        tome={selectedTomeForStudy()}
+        isOpen={selectedTomeForStudy() !== null}
+        onClose={() => setSelectedTomeForStudy(null)}
       />
     </div>
   );
