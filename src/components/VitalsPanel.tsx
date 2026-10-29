@@ -13,6 +13,7 @@ import {
   creditRating,
   setIsPanicModalOpen,
 } from '../stores/characterStore';
+import { setIsFinanceModalOpen } from './FinanceModal';
 
 export const VitalsPanel: Component = () => {
   const p = () => activeChar.investigator;
@@ -203,9 +204,13 @@ export const VitalsPanel: Component = () => {
           <span class="font-title font-bold text-stone-900 flex items-center gap-1.5 text-sm">
             🍀 幸運與戰術指標
           </span>
-          <span class="text-xs font-mono font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">
-            CR: {creditRating()}%
-          </span>
+          <button
+            onClick={() => setIsFinanceModalOpen(true)}
+            class="text-xs font-mono font-bold bg-amber-100 hover:bg-amber-200 text-amber-950 px-2 py-0.5 rounded border border-amber-300 cursor-pointer shadow-xs transition flex items-center gap-1"
+            title="查看信用評級 (CR) 官方隨身現金、日常消費水準與資產明細"
+          >
+            <span>💰 CR: {creditRating()}% 錢包</span>
+          </button>
         </div>
 
         <div class="grid grid-cols-3 gap-2 my-2 text-center">
