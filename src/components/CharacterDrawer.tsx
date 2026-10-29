@@ -9,6 +9,7 @@ import {
   duplicateCurrentCharacter,
   deleteCurrentCharacter,
 } from '../stores/characterStore';
+import { setIsWizardOpen } from './CreationWizardModal';
 
 export const CharacterDrawer: Component = () => {
   return (
@@ -37,10 +38,11 @@ export const CharacterDrawer: Component = () => {
             {/* Quick Actions */}
             <div class="grid grid-cols-2 gap-2 mb-4">
               <button
-                onClick={createNewCharacter}
-                class="bg-eldritch-green hover:bg-opacity-90 text-amber-100 px-3 py-2 rounded text-xs font-bold shadow flex items-center justify-center gap-1 cursor-pointer transition"
+                onClick={() => setIsWizardOpen(true)}
+                class="bg-eldritch-gold hover:bg-yellow-500 text-stone-950 px-3 py-2 rounded text-xs font-bold shadow flex items-center justify-center gap-1 cursor-pointer transition font-title"
+                title="啟動 480 點 / 經典隨機 / 100+ 職業技能點數創角精靈"
               >
-                <span>➕ 創建新調查員</span>
+                <span>🕯️ 創角引導精靈</span>
               </button>
               <button
                 onClick={duplicateCurrentCharacter}
