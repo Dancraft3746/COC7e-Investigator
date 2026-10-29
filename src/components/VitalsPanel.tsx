@@ -1,4 +1,4 @@
-import { Component } from 'solid-js';
+import { Component, createSignal } from 'solid-js';
 import {
   activeChar,
   setActiveChar,
@@ -15,8 +15,10 @@ import {
 } from '../stores/characterStore';
 import { setIsFinanceModalOpen } from './FinanceModal';
 import { setIsSanityRecoveryOpen } from './SanityRecoveryModal';
+import { MedicalTreatmentModal } from './MedicalTreatmentModal';
 
 export const VitalsPanel: Component = () => {
+  const [isMedicalModalOpen, setIsMedicalModalOpen] = createSignal(false);
   const p = () => activeChar.investigator;
 
   const handleAnchorRecovery = () => {
@@ -66,16 +68,25 @@ export const VitalsPanel: Component = () => {
           </div>
         </div>
 
-        {/* Major Wound Checkbox */}
-        <label class="flex items-center gap-2 text-xs font-bold text-sepia-900 mt-2 cursor-pointer bg-red-50 p-1.5 rounded border border-red-200">
-          <input
-            type="checkbox"
-            checked={p().majorWound}
-            onChange={(e) => setActiveChar('investigator', 'majorWound', e.currentTarget.checked)}
-            class="w-4 h-4 text-red-800 rounded cursor-pointer"
-          />
-          <span>標記重傷 (Major Wound)</span>
-        </label>
+        {/* Major Wound Checkbox & Medical Station Button */}
+        <div class="flex items-center justify-between gap-1 mt-2">
+          <label class="flex items-center gap-1.5 text-xs font-bold text-sepia-900 cursor-pointer bg-red-50 p-1.5 rounded border border-red-200">
+            <input
+              type="checkbox"
+              checked={p().majorWound}
+              onChange={(e) => setActiveChar('investigator', 'majorWound', e.currentTarget.checked)}
+              class="w-4 h-4 text-red-800 rounded cursor-pointer"
+            />
+            <span>標記重傷</span>
+          </label>
+          <button
+            onClick={() => setIsMedicalModalOpen(true)}
+            class="text-[11px] font-bold bg-red-800 hover:bg-red-900 text-white px-2 py-1.5 rounded cursor-pointer shadow-xs transition flex items-center gap-1"
+            title="開啟戰地醫療、急救 (+1 HP)、醫學 (+1D3 HP) 與重傷每週康復檢定"
+          >
+            <span>🩹 醫療救護站</span>
+          </button>
+        </div>
 
         {/* Dynamic Vitals State */}
         <div class={`mt-2 text-xs font-bold text-center py-1 rounded shadow-inner ${hpState().bgClass} ${hpState().isPulse ? 'animate-pulse' : ''}`}>
@@ -249,6 +260,12 @@ export const VitalsPanel: Component = () => {
           🏃 每輪常規可行進 {moveRate() * 5} 碼
         </div>
       </div>
+
+      {/* Medical Care, First Aid & Stabilization Modal */}
+      <MedicalTreatmentModal
+        isOpen={isMedicalModalOpen()}
+        onClose={() => setIsMedicalModalOpen(false)}
+      />
     </div>
   );
 };
