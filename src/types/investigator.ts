@@ -103,6 +103,15 @@ export interface WeaponItem {
   notes: string;
 }
 
+export interface ArmorItem {
+  id: string;
+  name: string;
+  armorPoints: number;
+  vsBulletsOnly?: boolean;
+  notes?: string;
+  isEquipped: boolean;
+}
+
 export interface TomeItem {
   id: string;
   name: string;
@@ -169,6 +178,7 @@ export interface InvestigatorData {
   ageModifiers?: CharacteristicModifiers;
   skills: SkillItem[];
   weapons: WeaponItem[];
+  armors?: ArmorItem[];
   tomes: TomeItem[];
   spells: SpellItem[];
   entities: EntityItem[];
