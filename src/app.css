@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+TC:wght@400;600;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-parchment-50: #FDFBF7;
+  --color-parchment-100: #FAF6EE;
+  --color-parchment-200: #F2E9D8;
+  --color-parchment-300: #E5D5BC;
+  --color-parchment-400: #D2BC9B;
+  --color-parchment-500: #BA9E77;
+  --color-parchment-800: #3D2817;
+  --color-parchment-900: #23160C;
+
+  --color-sepia-700: #4A3525;
+  --color-sepia-800: #362417;
+  --color-sepia-900: #24160E;
+
+  --color-eldritch-green: #1B382B;
+  --color-eldritch-crimson: #661A1A;
+  --color-eldritch-purple: #381C3D;
+  --color-eldritch-gold: #C5A059;
+
+  --font-serif: "Noto Serif TC", serif;
+  --font-title: "Cinzel", "Noto Serif TC", serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  background-color: #17100B;
+  background-image: radial-gradient(#2A1B10 1px, transparent 1px), radial-gradient(#2A1B10 1px, #17100B 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  color: #2C1810;
+  font-family: 'Noto Serif TC', serif;
+}
+
+.parchment-sheet {
+  background-color: #FAF5EB;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 0 100px rgba(186, 158, 119, 0.25);
+  border: 1px solid #BA9E77;
+}
+
+.vintage-border {
+  border: 2px solid #8C6D46;
+  outline: 1px solid #4A2E18;
+  outline-offset: -4px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #EADCC9;
+}
+::-webkit-scrollbar-thumb {
+  background: #8C6D46;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4A2E18;
+}

@@ -1,0 +1,56 @@
+import { Component, onMount, Switch, Match } from 'solid-js';
+import { Header } from '../components/Header';
+import { CharacterDrawer } from '../components/CharacterDrawer';
+import { VitalsPanel } from '../components/VitalsPanel';
+import { CharacteristicsGrid } from '../components/CharacteristicsGrid';
+import { SkillsTab } from '../components/SkillsTab';
+import { GrimoireTab } from '../components/GrimoireTab';
+import { MythosCodexTab } from '../components/MythosCodexTab';
+import { SocialWebTab } from '../components/SocialWebTab';
+import { ChronicleTab } from '../components/ChronicleTab';
+import { activeTab, initApp } from '../stores/characterStore';
+
+export default function Home() {
+  onMount(() => {
+    initApp();
+  });
+
+  return (
+    <div class="min-h-screen text-sepia-900 antialiased py-4 px-2 sm:px-6 md:px-8">
+      <div class="max-w-7xl mx-auto">
+        {/* Top Header */}
+        <Header />
+
+        {/* Multi-Character Slide-over Drawer */}
+        <CharacterDrawer />
+
+        {/* Main Content Sheet */}
+        <main class="parchment-sheet p-4 sm:p-6 rounded-b-lg shadow-2xl border-t-0 min-h-[750px]">
+          <Switch>
+            <Match when={activeTab() === 'core'}>
+              <div class="space-y-6">
+                <VitalsPanel />
+                <CharacteristicsGrid />
+              </div>
+            </Match>
+            <Match when={activeTab() === 'skills'}>
+              <SkillsTab />
+            </Match>
+            <Match when={activeTab() === 'grimoire'}>
+              <GrimoireTab />
+            </Match>
+            <Match when={activeTab() === 'mythos'}>
+              <MythosCodexTab />
+            </Match>
+            <Match when={activeTab() === 'contacts'}>
+              <SocialWebTab />
+            </Match>
+            <Match when={activeTab() === 'chronicles'}>
+              <ChronicleTab />
+            </Match>
+          </Switch>
+        </main>
+      </div>
+    </div>
+  );
+}

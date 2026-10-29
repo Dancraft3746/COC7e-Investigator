@@ -4,6 +4,7 @@
 
 # Local Reference Materials & Rulebooks (Heavy binary / Copyrighted PDFs)
 references/
+archive/
 *.pdf
 
 # Python bytecode & cache
@@ -32,3 +33,12 @@ Desktop.ini
 .DS_Store
 *.tmp
 *.bak
+
+# SolidStart & Vite build artifacts
+dist/
+.output/
+.vinxi/
+node_modules/
+.wrangler/
+.vercel/
+.netlify/
