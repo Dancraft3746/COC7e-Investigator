@@ -344,6 +344,10 @@ export interface DiceRollModalState {
   outcomeText: string;
   outcomeClass: string;
   isSuccess: boolean;
+  isPushed?: boolean;
+  burnedLuck?: number;
+  canBurnLuck?: boolean;
+  luckCost?: number;
 }
 
 export const [activeDiceRoll, setActiveDiceRoll] = createStore<DiceRollModalState>({
@@ -366,6 +370,10 @@ export function openDiceModal(title: string, target: number, skillId?: string) {
     outcomeText: '',
     outcomeClass: '',
     isSuccess: false,
+    isPushed: false,
+    burnedLuck: 0,
+    canBurnLuck: false,
+    luckCost: 0,
   });
 }
 
@@ -373,7 +381,7 @@ export function closeDiceModal() {
   setActiveDiceRoll('isOpen', false);
 }
 
-export function rollCurrentDice() {
+export function rollCurrentDice(isPush = false) {
   const result = Math.floor(Math.random() * 100) + 1;
   const target = activeDiceRoll.target;
   const fumbleThreshold = target < 50 ? 96 : 100;
@@ -399,12 +407,12 @@ export function rollCurrentDice() {
     outcomeClass = 'bg-blue-800 text-white font-bold';
     isSuccess = true;
   } else if (result <= target) {
-    outcomeText = '🟢 常規成功 (Regular Success)';
+    outcomeText = isPush ? '🟢 孤注一擲成功 (Pushed Success)' : '🟢 常規成功 (Regular Success)';
     outcomeClass = 'bg-green-800 text-white font-bold';
     isSuccess = true;
   } else {
-    outcomeText = '❌ 失敗 (Failure)';
-    outcomeClass = 'bg-stone-300 text-stone-800 font-bold';
+    outcomeText = isPush ? '💀 孤注一擲失敗！請守密人降下嚴重代價！' : '❌ 失敗 (Failure)';
+    outcomeClass = isPush ? 'bg-red-950 text-white font-black animate-pulse' : 'bg-stone-300 text-stone-800 font-bold';
     isSuccess = false;
   }
 
@@ -413,12 +421,50 @@ export function rollCurrentDice() {
     setActiveChar('skills', (s) => s.id === activeDiceRoll.skillId, 'checked', true);
   }
 
+  const luckCost = result - target;
+  const canBurnLuck =
+    !isSuccess &&
+    !isPush &&
+    result < fumbleThreshold &&
+    luckCost > 0 &&
+    luckCost <= activeChar.investigator.luck &&
+    !activeDiceRoll.title.includes('幸運') &&
+    !activeDiceRoll.title.includes('理智');
+
   setActiveDiceRoll({
     result,
     outcomeText,
     outcomeClass,
     isSuccess,
+    isPushed: isPush,
+    canBurnLuck,
+    luckCost: canBurnLuck ? luckCost : 0,
+    burnedLuck: 0,
   });
+}
+
+export function burnLuckForSuccess() {
+  const cost = activeDiceRoll.luckCost || 0;
+  if (cost <= 0 || cost > activeChar.investigator.luck) return;
+
+  const currentLuck = activeChar.investigator.luck;
+  setActiveChar('investigator', 'luck', currentLuck - cost);
+
+  if (activeDiceRoll.skillId) {
+    setActiveChar('skills', (s) => s.id === activeDiceRoll.skillId, 'checked', true);
+  }
+
+  setActiveDiceRoll({
+    isSuccess: true,
+    canBurnLuck: false,
+    burnedLuck: cost,
+    outcomeText: `🔥 燃燒 ${cost} 點幸運 ➜ 常規成功！`,
+    outcomeClass: 'bg-amber-500 text-stone-950 font-black',
+  });
+}
+
+export function pushCurrentRoll() {
+  rollCurrentDice(true);
 }
 
 export function copyLastRollDiscord() {
