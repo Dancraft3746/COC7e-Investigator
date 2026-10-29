@@ -5,6 +5,7 @@ import {
   charSum,
   openDiceModal,
 } from '../stores/characterStore';
+import { setIsAgeModalOpen } from './AgeAdjustmentModal';
 import type { Characteristics } from '../types/investigator';
 
 export const CharacteristicsGrid: Component = () => {
@@ -69,7 +70,16 @@ export const CharacteristicsGrid: Component = () => {
 
         <div class="grid grid-cols-3 gap-2">
           <div>
-            <label class="block text-[11px] font-bold text-sepia-700">年齡</label>
+            <div class="flex justify-between items-center">
+              <label class="block text-[11px] font-bold text-sepia-700">年齡</label>
+              <button
+                onClick={() => setIsAgeModalOpen(true)}
+                class="text-[9px] font-bold text-amber-800 hover:text-amber-950 underline cursor-pointer"
+                title="開啟官方年齡生理修正與 EDU 增長計算器"
+              >
+                ⏳ 修正
+              </button>
+            </div>
             <input
               type="number"
               value={p().age}

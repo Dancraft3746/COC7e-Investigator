@@ -12,6 +12,7 @@ import { ChronicleTab } from '../components/ChronicleTab';
 import { DiceModal } from '../components/DiceModal';
 import { PanicModal } from '../components/PanicModal';
 import { CreationWizardModal } from '../components/CreationWizardModal';
+import { AgeAdjustmentModal } from '../components/AgeAdjustmentModal';
 import { activeTab, initApp } from '../stores/characterStore';
 
 export default function Home() {
@@ -36,6 +37,9 @@ export default function Home() {
 
         {/* Global Investigator Creation Wizard */}
         <CreationWizardModal />
+
+        {/* Global Age Adjustment & EDU Improvement Modal */}
+        <AgeAdjustmentModal />
 
         {/* Main Content Sheet */}
         <main class="parchment-sheet p-4 sm:p-6 rounded-b-lg shadow-2xl border-t-0 min-h-[750px]">
