@@ -7,6 +7,7 @@ import {
   majorWoundThreshold,
 } from '../stores/characterStore';
 import type { WeaponItem } from '../types/investigator';
+import { TacticalEngineModal } from './TacticalEngineModal';
 
 const HISTORICAL_WEAPONS: Omit<WeaponItem, 'id'>[] = [
   {
@@ -80,6 +81,7 @@ const HISTORICAL_WEAPONS: Omit<WeaponItem, 'id'>[] = [
 export const WeaponsPanel: Component = () => {
   const [targetBuild, setTargetBuild] = createSignal(1);
   const [showArmoryModal, setShowArmoryModal] = createSignal(false);
+  const [showTacticalModal, setShowTacticalModal] = createSignal(false);
 
   // Tactical Armor & Cover Damage Absorber
   const [incomingDmg, setIncomingDmg] = createSignal(0);
@@ -181,12 +183,21 @@ export const WeaponsPanel: Component = () => {
               包含傷害、射程、射速、彈藥消耗與故障值
             </p>
           </div>
-          <button
-            onClick={() => setShowArmoryModal(true)}
-            class="bg-eldritch-gold hover:bg-yellow-500 text-stone-950 px-3 py-1.5 rounded text-xs font-bold shadow flex items-center gap-1 cursor-pointer transition font-title"
-          >
-            <span>➕ 添購歷史武器</span>
-          </button>
+          <div class="flex items-center gap-2">
+            <button
+              onClick={() => setShowTacticalModal(true)}
+              class="bg-red-950 hover:bg-black text-amber-100 px-3 py-1.5 rounded text-xs font-bold shadow flex items-center gap-1 cursor-pointer transition font-title"
+              title="開啟官方第七版追逐規則運算儀與體格戰技對抗器"
+            >
+              <span>🏃 追逐與戰技對抗器</span>
+            </button>
+            <button
+              onClick={() => setShowArmoryModal(true)}
+              class="bg-eldritch-gold hover:bg-yellow-500 text-stone-950 px-3 py-1.5 rounded text-xs font-bold shadow flex items-center gap-1 cursor-pointer transition font-title"
+            >
+              <span>➕ 添購歷史武器</span>
+            </button>
+          </div>
         </div>
 
         {/* Weapons Grid */}
@@ -453,6 +464,12 @@ export const WeaponsPanel: Component = () => {
           </div>
         </div>
       </Show>
+
+      {/* Official Tactical Maneuver & Chase Simulator Modal */}
+      <TacticalEngineModal
+        isOpen={showTacticalModal()}
+        onClose={() => setShowTacticalModal(false)}
+      />
     </div>
   );
 };
