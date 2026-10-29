@@ -23,6 +23,33 @@ export const SkillsTab: Component = () => {
     return activeChar.skills.filter((s) => s.name.toLowerCase().includes(q));
   };
 
+  // Keeper's Companion p.20 Specialization Minimums
+  const fightingSkills = () => activeChar.skills.filter((s) => s.name.includes('格鬥'));
+  const maxFighting = () => {
+    const fs = fightingSkills();
+    if (fs.length === 0) return 25;
+    return Math.max(...fs.map((s) => s.total));
+  };
+  const minFightingBaseline = () => Math.floor(maxFighting() / 2);
+
+  const firearmSkills = () => activeChar.skills.filter((s) => s.name.includes('射擊'));
+  const maxFirearm = () => {
+    const fs = firearmSkills();
+    if (fs.length === 0) return 20;
+    return Math.max(...fs.map((s) => s.total));
+  };
+  const minFirearmBaseline = () => Math.floor(maxFirearm() / 2);
+
+  const alignToCompanionBaseline = (skill: SkillItem, baseline: number) => {
+    const diff = baseline - skill.total;
+    if (diff <= 0) return;
+    setActiveChar('skills', (s) => s.id === skill.id, (prev) => ({
+      ...prev,
+      growth: prev.growth + diff,
+      total: baseline,
+    }));
+  };
+
   const handleCopyRoll = (skill: SkillItem) => {
     const cmd = formatDiceCommand(skill.name, skill.total);
     navigator.clipboard.writeText(cmd);
@@ -99,6 +126,16 @@ export const SkillsTab: Component = () => {
         </div>
       </div>
 
+      {/* Keeper's Companion Specialization Minimums Banner (p.20) */}
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-2.5 bg-amber-50 rounded border border-amber-300 gap-2 text-xs font-serif">
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="font-bold text-amber-950 font-title">⚔️ 伴侶版戰鬥互通門檻 (Companion p.20)：</span>
+          <span class="text-sepia-800">
+            格鬥專精不得低於最高值之半 <strong>({minFightingBaseline()}%)</strong> • 射擊專精不得低於最高值之半 <strong>({minFirearmBaseline()}%)</strong>
+          </span>
+        </div>
+      </div>
+
       {/* Skills 2-Column Responsive Grid */}
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
         <For each={filteredSkills()}>
@@ -140,6 +177,24 @@ export const SkillsTab: Component = () => {
                   <span class="text-xs font-bold text-sepia-900 truncate">
                     {skill.name}
                   </span>
+                  <Show when={skill.name.includes('格鬥') && skill.total < minFightingBaseline()}>
+                    <button
+                      onClick={() => alignToCompanionBaseline(skill, minFightingBaseline())}
+                      class="text-[9px] font-bold bg-amber-200 hover:bg-amber-300 text-amber-950 px-1.5 py-0.5 rounded cursor-pointer transition shrink-0 border border-amber-400"
+                      title={`伴侶互通門檻：格鬥不得低於 ${minFightingBaseline()}%。點擊自動對齊！`}
+                    >
+                      伴侶門檻 {minFightingBaseline()}%
+                    </button>
+                  </Show>
+                  <Show when={skill.name.includes('射擊') && skill.total < minFirearmBaseline()}>
+                    <button
+                      onClick={() => alignToCompanionBaseline(skill, minFirearmBaseline())}
+                      class="text-[9px] font-bold bg-amber-200 hover:bg-amber-300 text-amber-950 px-1.5 py-0.5 rounded cursor-pointer transition shrink-0 border border-amber-400"
+                      title={`伴侶互通門檻：射擊不得低於 ${minFirearmBaseline()}%。點擊自動對齊！`}
+                    >
+                      伴侶門檻 {minFirearmBaseline()}%
+                    </button>
+                  </Show>
                 </div>
 
                 {/* Values & Quick Roll */}
