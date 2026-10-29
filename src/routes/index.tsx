@@ -10,6 +10,7 @@ import { MythosCodexTab } from '../components/MythosCodexTab';
 import { SocialWebTab } from '../components/SocialWebTab';
 import { ChronicleTab } from '../components/ChronicleTab';
 import { DiceModal } from '../components/DiceModal';
+import { PanicModal } from '../components/PanicModal';
 import { activeTab, initApp } from '../stores/characterStore';
 
 export default function Home() {
@@ -28,6 +29,9 @@ export default function Home() {
 
         {/* Global Interactive Dice Roller Modal */}
         <DiceModal />
+
+        {/* Global 5F Acute Panic & Bout of Madness Modal */}
+        <PanicModal />
 
         {/* Main Content Sheet */}
         <main class="parchment-sheet p-4 sm:p-6 rounded-b-lg shadow-2xl border-t-0 min-h-[750px]">

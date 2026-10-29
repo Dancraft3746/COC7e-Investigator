@@ -35,6 +35,7 @@ export const [activeTab, setActiveTab] = createSignal<
 >('core');
 export const [isDrawerOpen, setIsDrawerOpen] = createSignal(false);
 export const [isDiscordModalOpen, setIsDiscordModalOpen] = createSignal(false);
+export const [isPanicModalOpen, setIsPanicModalOpen] = createSignal(false);
 export const [discordBotPrefix, setDiscordBotPrefix] = createSignal<DiceBotPrefix>('.ra');
 export const [rosterSummaries, setRosterSummaries] = createSignal<CharacterSummary[]>([]);
 export const [isInitialized, setIsInitialized] = createSignal(false);
@@ -426,5 +427,25 @@ export function copyLastRollDiscord() {
   navigator.clipboard.writeText(text);
   alert('✅ 已複製擲骰結果至剪貼簿！直接在 Discord 貼上即可發布！');
 }
+
+
+// 5F Acute Panic & Bout State
+export interface PanicState {
+  fiveF: string;
+  fiveFDesc: string;
+  symptom: string;
+  symptomDesc: string;
+  durationRounds: number;
+  phobiaMania: string;
+}
+
+export const [activePanic, setActivePanic] = createStore<PanicState>({
+  fiveF: '',
+  fiveFDesc: '',
+  symptom: '',
+  symptomDesc: '',
+  durationRounds: 0,
+  phobiaMania: '',
+});
 
 export { activeChar, setActiveChar };

@@ -11,6 +11,7 @@ import {
   moveRate,
   buildAndDB,
   creditRating,
+  setIsPanicModalOpen,
 } from '../stores/characterStore';
 
 export const VitalsPanel: Component = () => {
@@ -180,6 +181,15 @@ export const VitalsPanel: Component = () => {
             <span>心智質變</span>
           </label>
         </div>
+
+        {/* 5F Panic Resolver Button */}
+        <button
+          onClick={() => setIsPanicModalOpen(true)}
+          class="w-full mt-2 bg-purple-950 hover:bg-purple-900 text-amber-200 py-1 rounded text-xs font-bold shadow-xs cursor-pointer transition flex items-center justify-center gap-1.5 border border-purple-800 hover:scale-[1.01]"
+          title="開啟 5F 恐慌本能反應與 1D10 即時發狂解析輪盤"
+        >
+          <span>🩸 5F 恐慌與發狂輪盤</span>
+        </button>
 
         {/* Dynamic Sanity State */}
         <div class={`mt-2 text-xs font-bold text-center py-1 rounded shadow-inner ${sanState().bgClass} ${sanState().isPulse ? 'animate-pulse' : ''}`}>
